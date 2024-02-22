@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 
 from .forms import SignInForm, SignUpForm
-#from .models import GuidebookTopics
+from .models import DictionaryPage
 # Create your views here.
 
 
@@ -63,7 +63,8 @@ def guidebook_view(request):
 
 
 def dictionary_view(request):
-	return render(request, 'main/dictionary.html')
+	dictionarypage = DictionaryPage.objects.all()
+	return render(request, 'main/dictionary.html', {'dictionarypage': dictionarypage})
 
 
 def articles_view(request):

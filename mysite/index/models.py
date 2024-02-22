@@ -75,14 +75,6 @@ class TaskPage(Page):
     ]
 
 
-class DictionaryIndexPage(Page):
-    body = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body'),
-    ]
-
-
 class DictionaryPage(Page):
     word = models.CharField(max_length=255, blank=True)
     image_word = models.ImageField(max_length=255, blank=True, upload_to='images/dictionary/')
