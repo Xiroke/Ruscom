@@ -1,0 +1,73 @@
+body {
+  width: 100%;
+  overflow: hidden;
+}
+
+.sign-in {
+  display: flex;
+  width: 100%;
+}
+.sign-in_img {
+  display: block;
+  height: 46vw;
+}
+.sign-in_img img {
+  height: 100%;
+}
+.sign-in_form {
+  display: block;
+  position: relative;
+  margin: 80px auto 0 auto;
+}
+.sign-in_form_logo img {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+}
+.sign-in_form_sign-up {
+  box-sizing: border-box;
+  display: block;
+  margin: 20px 0 0 0;
+  width: 560px;
+  height: 50px;
+  background: #fff;
+  border-radius: 15px;
+  border: #1D1E33 1px solid;
+  padding: 0 20px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 10px;
+}
+.sign-in_form form {
+  min-width: 560px;
+  margin-top: 80px;
+}
+.sign-in_form form label {
+  display: block;
+  width: 100%;
+  font-size: 24px;
+}
+.sign-in_form form input {
+  box-sizing: border-box;
+  margin: 20px 0 40px 0;
+  display: block;
+  width: 560px;
+  height: 50px;
+  background: #F3F3F4;
+  border-radius: 15px;
+  border: none;
+  padding: 0 20px;
+  font-size: 20px;
+}
+.sign-in_form form button {
+  width: 560px;
+  height: 50px;
+  background: #1D1E33;
+  border-radius: 15px;
+  border: none;
+  padding: 0 20px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+}/*# sourceMappingURL=sign_in.css.map */
