@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Отображение графа с информацией</title>
+    <link rel="stylesheet" href="{% static 'css/guidebook_graph.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+  </head>
+  <body>
+    <a class="leave" href="{% url 'homeUrl' %}">
+      <img src="{% static 'img/leave.svg' %}" alt=""/>
+      
+    </a>
+    <div id="graph-container"></div>
+    
+    <div class="tooltip">
+      <div class="tooltip_label">Текст</div>
+
+      </div>
+    </div>
+
+    <!-- Затемнение фона (overlay) -->
+    <div class="overlay" onclick="hideNodeTooltip()"></div>
+
+    <div id="node-data">
+      {% for node in data.nodes %}
+      <div data-id="{{node.id}}" data-label="{{node.label}}" data-pack_tasks_title="{{node.pack_tasks_title}}" data-pack_tasks_id="{{node.pack_tasks_id}}"></div>
+      {% endfor %}
+    </div>
+
+    <div id="link-data">
+      {% for link in data.links %}
+      <div data-source="{{link.from}}" data-target="{{link.to}}"></div>
+      {% endfor %}
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="{% static 'js/guidebook_graph.js' %}"></script>
+  </body>
+</html>

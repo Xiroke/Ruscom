@@ -1,0 +1,17 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/theory.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="theory">
+  <h1>{{theory.title}}</h1>
+  {{theory.information}}
+</div>
+{% endblock %}

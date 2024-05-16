@@ -24,60 +24,62 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
-    "home",
-    "search",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.embeds",
-    "wagtail.sites",
-    "wagtail.users",
-    "wagtail.snippets",
-    "wagtail.documents",
-    "wagtail.images",
-    "wagtail.search",
-    "wagtail.admin",
-    "wagtail",
-    "modelcluster",
-    "taggit",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
+  "home",
+  "search",
+  "wagtail.contrib.forms",
+  "wagtail.contrib.redirects",
+  "wagtail.embeds",
+  "wagtail.sites",
+  "wagtail.users",
+  "wagtail.snippets",
+  "wagtail.documents",
+  "wagtail.images",
+  "wagtail.search",
+  "wagtail.admin",
+  "wagtail",
+  "modelcluster",
+  "taggit",
+  "django.contrib.admin",
+  "django.contrib.auth",
+  "django.contrib.contenttypes",
+  "django.contrib.sessions",
+  "django.contrib.messages",
+  "django.contrib.staticfiles",
 
-    'index',
+  'django_email_verification',
+  
+  'index',
 ]
 
 MIDDLEWARE = [
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
-    "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+  "django.contrib.sessions.middleware.SessionMiddleware",
+  "django.middleware.common.CommonMiddleware",
+  "django.middleware.csrf.CsrfViewMiddleware",
+  "django.contrib.auth.middleware.AuthenticationMiddleware",
+  "django.contrib.messages.middleware.MessageMiddleware",
+  "django.middleware.clickjacking.XFrameOptionsMiddleware",
+  "django.middleware.security.SecurityMiddleware",
+  "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
 ROOT_URLCONF = "mysite.urls"
 
 TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(PROJECT_DIR, "templates"),
-        ],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-            ],
-        },
-    },
+  {
+      "BACKEND": "django.template.backends.django.DjangoTemplates",
+      "DIRS": [
+          os.path.join(PROJECT_DIR, "templates"),
+      ],
+      "APP_DIRS": True,
+      "OPTIONS": {
+          "context_processors": [
+              "django.template.context_processors.debug",
+              "django.template.context_processors.request",
+              "django.contrib.auth.context_processors.auth",
+              "django.contrib.messages.context_processors.messages",
+          ],
+      },
+  },
 ]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
@@ -86,11 +88,12 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
+  "default": {
+      "ENGINE": "django.db.backends.sqlite3",
+      "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+  }
 }
 
 
@@ -98,18 +101,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+  {
+      "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+  },
+  {
+      "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+  },
+  {
+      "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+  },
+  {
+      "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+  },
 ]
 
 
@@ -129,12 +132,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+  "django.contrib.staticfiles.finders.FileSystemFinder",
+  "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
+  os.path.join(PROJECT_DIR, "static"),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
@@ -146,16 +149,16 @@ MEDIA_URL = "/media/"
 # Default storage settings, with the staticfiles storage updated.
 # See https://docs.djangoproject.com/en/5.0/ref/settings/#std-setting-STORAGES
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    # ManifestStaticFilesStorage is recommended in production, to prevent
-    # outdated JavaScript / CSS assets being served from cache
-    # (e.g. after a Wagtail upgrade).
-    # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
-    },
+  "default": {
+      "BACKEND": "django.core.files.storage.FileSystemStorage",
+  },
+  # ManifestStaticFilesStorage is recommended in production, to prevent
+  # outdated JavaScript / CSS assets being served from cache
+  # (e.g. after a Wagtail upgrade).
+  # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
+  "staticfiles": {
+      "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+  },
 }
 
 
@@ -166,9 +169,9 @@ WAGTAIL_SITE_NAME = "mysite"
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
-    }
+  "default": {
+      "BACKEND": "wagtail.search.backends.database",
+  }
 }
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
@@ -176,3 +179,33 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
 AUTH_USER_MODEL = 'index.User'
+
+
+# For Email Verification
+def verified_callback(user):
+  user.is_active = True
+
+
+
+
+EMAIL_MAIL_CALLBACK = verified_callback
+EMAIL_VERIFIED_CALLBACK = verified_callback
+EMAIL_FROM_ADDRESS = 'ruscomsite@gmail.com'
+EMAIL_MAIL_SUBJECT = 'Confirm your email {{ user.username }}'
+EMAIL_MAIL_HTML = 'index/mail_body.html'
+EMAIL_MAIL_PLAIN = 'index/mail_body.txt'
+EMAIL_MAIL_TOKEN_LIFE = 60 * 60
+EMAIL_MAIL_PAGE_TEMPLATE = 'index/confirm_template.html'
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/' # Host
+# EMAIL_MULTI_USER = True  # optional (defaults to False)
+
+# For Django Email Backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ruscomsite@gmail.com'
+EMAIL_HOST_PASSWORD = 'oxgmsktsfjsjwfan'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'ruscomsite@gmail.com'
+SERVER_EMAIL = 'ruscomsite@gmail.com'
+

@@ -1,21 +1,36 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+from .models import TaskSimple
+
 
 class SignInForm(forms.Form):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Введите электронную почту', }), label='Почта')
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль', }), label='Пароль')
-    
-
+  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Введите электронную почту', }), label='Почта')
+  password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль', }), label='Пароль')
+  
 
 class SignUpForm(UserCreationForm):
-    username = forms.CharField(max_length=254, widget=forms.TextInput(attrs={'placeholder': 'Введите логин', }), label='Логин')
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Введите электронную почту', }), label='Почта')
-    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль', }), label='Пароль')
-    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль ещё раз', }), label='Пароль ещё раз')
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+  name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'placeholder': 'Введите имя', }), label='Имя')
+  email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Введите электронную почту', }), label='Почта')
+  password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль', }), label='Пароль')
+  password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Введите пароль ещё раз', }), label='Пароль ещё раз')
+  class Meta:
+    model = get_user_model()
+    fields = ['name', 'email', 'password1', 'password2']
 
-class SearchArticleForm(forms.ModelForm):
-    search = forms.CharField(max_length=100)
+
+class TaskSimpleForm(forms.ModelForm):
+  answer = forms.CharField(label = '')
+
+  class Meta:
+    model = TaskSimple
+    fields = ['answer']
+
+
+class SearchTestsForm(forms.ModelForm):
+  title = forms.CharField(label = '')
+
+  class Meta:
+    model = TaskSimple
+    fields = ['title']

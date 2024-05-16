@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/home.min.css' %}">
+{% endblock %}
+{% block content %}
+<div class="home">
+  <div class="learn">
+    <div class="learn_rotating-image">
+      <img src="{% static 'img/circle.png' %}">
+    </div>
+    <div class="learn_text">
+      <div class="learn_text_index">
+        Изучайте <span>Русский язык</span> в любом месте
+      </div>
+      <div class="learn_text_text">
+        <div>Подготовтесь к егэ и огэ</div>
+        <div>Повышайте грамотность</div>
+        <div>Ускорьте изучение в несколько раз</div>
+      </div>
+      <a href="{% url 'sign_inUrl' %}"><button class="learn_btn btn-big">Начать</button></a>
+    </div>
+  </div>
+
+  <div class="advantages">
+    <div class="advantages_bg"></div>
+    <div class="advantages_items">
+      <div class="advantages_title"><div class="advantages_circle"></div><span>Наши возможности</span></div>
+      <div class="advantages_item1 advantages_item"><span>Удобные тесты для быстрого усвоения знаний</span></div>
+      <div class="advantages_item2 advantages_item"><span>Ёмкий словарь для вашего удобства</span></div>
+      <div class="advantages_item3 advantages_item"><span>Большое количество тем для изучения</span></div>
+    </div>
+  </div>
+</div>
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

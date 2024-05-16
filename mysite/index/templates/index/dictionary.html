@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+Словарь
+{% endblock %}
+
+{% block link %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/select2.min.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<link rel="stylesheet" href="{% static 'css/dictionary.min.css' %}">
+
+<script>
+  $(document).ready(function () {
+      $("#select-word").select2({})
+  })
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="dictionary">
+    <a href="#" class="dictionary_item dictionary_svg"><img src="{% static 'img/random-page.svg' %}"></a>
+    <form method="post" class="dictionary_item dictionary_form">
+        {% csrf_token %}
+        <select id="select-word" class="dictionary_select">
+            <option value="" selected hidden>Выберите слово</option>
+            <option></option>
+            {% for words in dictionarypage %}
+                <option>{{ words.word }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="dictionary_item dictionary_button">Поиск</button>
+    </form>
+</div>
+<div class="underText">Всегда можно стать лучше</div>
+{% endblock %}

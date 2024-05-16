@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    {% block link %}
+    
+    {% endblock %}
+</head>
+<body>
+    <nav>
+        <a href="{% url 'homeUrl'%}" class="home"><img src="{% static 'img/Ruscom-logo.svg' %}", height="30px", width="40px"></a>
+
+        <div class="main">
+            <a href="{% url 'guidebook_graphUrl' %}">Учебник</a> 
+            <a href="{% url 'dictionaryUrl' %}">Словарь</a> 
+            <a href="{% url 'testsUrl' filter='all'%}">Тесты</a> 
+        </div>
+
+        <a href="{% url 'profileUrl' %}" class="profile">Профиль</a>
+
+        <div class="gamburger"><img src="{% static 'img/gamburger.svg'%}"></div>
+    </nav>
+
+    <div class="feedback">Свзяться с нами</div>
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>
