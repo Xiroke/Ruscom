@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
-from .models import TaskSimple
+from .models import TaskSimple, DictionaryPage
 
 
 class SignInForm(forms.Form):
@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
 
 
 class TaskSimpleForm(forms.ModelForm):
-  answer = forms.CharField(label = '')
+  answer = forms.CharField(label = '', widget=forms.TextInput(attrs={'autocomplete': 'off'}))
 
   class Meta:
     model = TaskSimple
@@ -34,3 +34,4 @@ class SearchTestsForm(forms.ModelForm):
   class Meta:
     model = TaskSimple
     fields = ['title']
+

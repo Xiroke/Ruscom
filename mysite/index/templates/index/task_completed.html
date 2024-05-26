@@ -1,0 +1,22 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/task_simple.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="task">
+  {% if accuracy %}
+    <div class="answer-status">Вы ответили правильно и заработали +1 очко</div>
+    <div class="user-answer-true">Ваш Ответ: <span>{{answer}}</span></div>
+  {% else %}
+    <div class="answer-status">Вы ответили неправильно</div>
+    <div class="user-answer-false">Ваш Ответ: <span>{{answer}}</span></div>
+  {% endif %}
+</div>
+{% endblock %}

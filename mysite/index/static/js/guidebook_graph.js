@@ -1,11 +1,14 @@
-// Функция для получения данных узлов графа из HTML
+// Функция для получения данных узлов (node) графа из HTML
 function getNodeDataFromHTML() {
   return Array.from(document.querySelectorAll("#node-data > div")).map(
     (div) => ({
       id: div.getAttribute("data-id"),
       label: div.getAttribute("data-label"),
-      pack_tasks_title: div.getAttribute("data-pack_tasks_title").split("[").join('').split("]").join('').split("'").join('').split(','),
-      pack_tasks_id: div.getAttribute("data-pack_tasks_id").split("[").join('').split("]").join('').split(', '),
+      guidebook_item_title: div.getAttribute("data-pack_guidebook_item_title").split("[").join('').split("]").join('').split("'").join('').split(', '),
+      guidebook_item_id: div.getAttribute("data-pack_guidebook_item_id").split("[").join('').split("]").join('').split(', '),
+      guidebook_item_type: div.getAttribute("data-pack_guidebook_item_type").split("[").join('').split("]").join('').split(">").join('').split('<').join('').split(', '),
+      angle: Math.random() * 2 * Math.PI,
+      radius: (Math.random() + 0.4) * 300,
     })
   );
 }
@@ -33,23 +36,30 @@ const svg = d3
   .attr("width", "100%")
   .attr("height", "100%")
   .attr("viewBox", [0, 0, 1920, 1080])
-  .attr("preserveAspectRatio", "xMidYMid meet");
+  .attr("preserveAspectRatio", "xMidYMid meet")
+  .call(d3.zoom().on("zoom", zoomed));
+
+const container = svg.append("g");
+
+// Функция для масштабирования и перетаскивания
+function zoomed(event) {
+  container.attr("transform", event.transform);
+}
 
 // Создание симуляции силового графа
 const simulation = d3
   .forceSimulation(graphData.nodes)
   .force(
     "link",
-    d3.forceLink(graphData.links).id((d) => d.id)
+    d3.forceLink(graphData.links).id((d) => d.id).distance(100)
   )
-  .force("charge", d3.forceManyBody().strength(-1000)) // Отталкивание между узлами
-  .force("center", d3.forceCenter(window.innerWidth/2, window.innerHeight/2))
-  .force("node-text", d3.forceManyBody().strength(-2000))
+  .force("charge", d3.forceManyBody().strength(-1000))
+  .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
+  .alphaDecay(0.02)
   .on("tick", ticked);
 
-  
 // Отрисовка связей (links) на SVG элементе
-const link = svg
+const link = container
   .append("g")
   .attr("stroke", "#999")
   .attr("stroke-opacity", 0.6)
@@ -58,38 +68,44 @@ const link = svg
   .join("line");
 
 // Отрисовка узлов (nodes) на SVG элементе
-const node = svg
+const node = container
   .append("g")
   .selectAll("circle")
   .data(graphData.nodes)
   .join("circle")
-  .attr("r", 13)
+  .attr("r", (d) => (d.label === "Ruscom" ? 30 : 20))
   .attr("fill", "#9f9f9f")
-  .on("click", (event, d) => showNodeTooltip(event, d)) // Показываем всплывающее окно при клике
+  .on("click", (event, d) => showNodeTooltip(event, d))
   .call(
-    d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
+    d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended)
   );
 
 // Скрытие всплывающего окна при клике вне узла
 document.addEventListener("click", (event) => {
   const tooltip = document.querySelector(".tooltip");
-  if (!tooltip.style.display == "none") {
+  if (tooltip.style.display !== "none" && !event.target.closest(".tooltip")) {
     hideNodeTooltip(event);
   }
 });
 
 // Добавление текста с названием узла рядом с каждым узлом
-const text = svg
+const text = container
   .append("g")
   .selectAll("text")
   .data(graphData.nodes)
   .join("text")
-  .attr("x", 8)
-  .attr("y", 4)
-  .text((d) => d.label);
+  .text((d) => d.label)
+  .attr("text-anchor", "middle")
+  .attr("class", "node-text");
 
 // Добавление всплывающих подсказок к узлам
 node.append("title").text((d) => d.label);
+
+// Переменные для вращения узлов вокруг центра
+const rotationSpeed = 0.002;
 
 // Функция для обновления позиций узлов и связей в графе
 function ticked() {
@@ -101,7 +117,7 @@ function ticked() {
 
   node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
-  text.attr("x", (d) => d.x).attr("y", (d) => d.y + 30);
+  text.attr("x", (d) => d.x).attr("y", (d) => d.y + 40);
   text.attr("text-anchor", "middle");
   text.attr("class", "node-text");
 }
@@ -124,49 +140,67 @@ function dragended(event, d) {
   d.fy = null;
 }
 
+function createObjectOfPack(parent, pack_title, pack_id, pack_type) {
+  let theories = document.createElement('div');
+  let tasks = document.createElement('div');
+  theories.className = 'tooltip_theories';
+  theories.innerHTML = 'Теория';
+  tasks.innerHTML = 'Задание';
+  tasks.className = 'tooltip_tasks';
+  for (let i = 0; i < pack_title.length; i++) {
+    if (pack_title[i] != "") {
+      
+      let task = document.createElement('div');
+      let url = document.createElement('a');
+      url.href = '../task_item/' + pack_id[i];
+      task.innerHTML = pack_title[i];
+      task.classList.add('tooltip_task');
+      url.classList.add('tooltip_task_url');
+      url.appendChild(task);
+      console.log(pack_type[i])
+      switch (pack_type[i]) {
+        case 'Theory':
+          theories.appendChild(url);
+          break;
+        case 'TaskSimple':
+          tasks.appendChild(url);
+          break;
+
+        case 'TaskDifficultАrchitecture':
+          tasks.appendChild(url);
+          break;
+      }
+      parent.appendChild(theories);
+      parent.appendChild(tasks);
+    } else {
+      console.log('')
+    }
+  }
+}
+
 function showNodeTooltip(event, d) {
+  event.stopPropagation();
   const tooltip = document.querySelector(".tooltip");
   const tooltipLabel = document.querySelector(".tooltip_label");
   const overlay = document.querySelector(".overlay");
 
-  const pack_tasks_title = d.pack_tasks_title;
-  let tooltip_tasks = document.createElement('div');
-  tooltip_tasks.id = 'tooltip_tasks';
-  tooltip.appendChild(tooltip_tasks);
-  console.log(typeof(pack_tasks_title));
-  console.log(d.tasks_id);
-  for(let i = 0; i < pack_tasks_title.length; i++) {
-    if (pack_tasks_title != ""){
-      task = document.createElement('div');
-      url = document.createElement('a');
-      url.href = '../task_type1/' + d.pack_tasks_id[i];
-      url.innerHTML = pack_tasks_title[i];
-      task.appendChild(url);
-      task.classList.add('tooltip_task');
-      tooltip_tasks.appendChild(task);
-    }
-    else {
-      console.log('')
-    };
-  };
+  let tooltip_item = document.createElement('div');
+  tooltip_item.className = 'tooltip_item';
+  tooltip.appendChild(tooltip_item);
+  createObjectOfPack(tooltip_item, d.guidebook_item_title, d.guidebook_item_id, d.guidebook_item_type);
 
-  // Устанавливаем текст всплывающего окна
   tooltipLabel.innerHTML = d.label;
-  
 
-
-  // Показываем всплывающее окно
   tooltip.style.display = "block";
-  // Показываем затемнение фона
   overlay.style.display = "block";
 }
 
 function hideNodeTooltip(event) {
   const tooltip = document.querySelector(".tooltip");
+  const tooltip_item = document.querySelector(".tooltip_item");
   const overlay = document.querySelector(".overlay");
 
-  tooltip.removeChild(document.getElementById('tooltip_tasks'));
-  // Скрываем всплывающее окно и затемнение фона
+  tooltip_item.parentNode.removeChild(tooltip_item);
   tooltip.style.display = "none";
   overlay.style.display = "none";
 }

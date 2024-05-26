@@ -1,0 +1,19 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/dictionary_word.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dictionary-word">
+  <h1>{{word.word}}</h1>
+  <div class="dicrionary-word_information">
+    {{word.information}}
+  </div>
+</div>
+{% endblock %}

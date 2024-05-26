@@ -1,0 +1,26 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/task_simple.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="task">
+  <form method="post">
+    
+  {% for form, question in item %}
+    <div class="task_question">{{question}}</div>
+    
+      {% csrf_token %}
+      {{ form.as_p }}
+
+  {% endfor %}
+  <button type="submit" class="btn-small">Ответить</button>
+  </form>
+</div>
+{% endblock %}

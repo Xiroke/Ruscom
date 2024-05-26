@@ -23,20 +23,20 @@
   </form>
 </div>
 -->
-<div class="test_tasks">
-{% for task in tasks %}
-<div class="tests_task">
-  <div class="tests_task_black-square"></div>
-  <div class="tests_task_title"><span>{{ task.title }}</span></div>
-  <div class="tests_task_author"><span>{{ task.author.name }}</span></div>
-  <div class="tests_task_categories">
-  {% for category in task.category.all %}
-    <div class="tests_task_categories_category"><span>{{ category }}</span></div>
-  {% endfor %}
+<div class="tests_tasks">
+  {% for task in tasks %}
+  <div class="tests_task">
+    <div class="tests_task_black-square"></div>
+    <div class="tests_task_title"><span>{{ task.title }}</span></div>
+    <div class="tests_task_author"><span>{{ task.author.name }}</span></div>
+    <div class="tests_task_categories">
+    {% for category in task.category.all %}
+      <div class="tests_task_categories_category"><span>{{ category }}</span></div>
+    {% endfor %}
+    </div>
+    <div class="tests_task_description"><span>{{ task.description }}</span></div>
+    <a href="{% url 'task_itemUrl' task.id %}" class="tests_task_btn"><button class="test_task_btn btn-medium">Решить</button></a>
   </div>
-  <div class="tests_task_description"><span>{{ task.description }}</span></div>
-  <a href="{% url 'task_type1Url' task.id %}" class="tests_task_btn"><button class="test_task_btn btn-medium">Решить</button></a>
-</div>
-{% endfor %}
+  {% endfor %}
 </div>
 {% endblock %}

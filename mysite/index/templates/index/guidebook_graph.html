@@ -10,8 +10,7 @@
   </head>
   <body>
     <a class="leave" href="{% url 'homeUrl' %}">
-      <img src="{% static 'img/leave.svg' %}" alt=""/>
-      
+      <img src="{% static 'img/leave.svg' %}" width="30px" height="30px">
     </a>
     <div id="graph-container"></div>
     
@@ -26,7 +25,12 @@
 
     <div id="node-data">
       {% for node in data.nodes %}
-      <div data-id="{{node.id}}" data-label="{{node.label}}" data-pack_tasks_title="{{node.pack_tasks_title}}" data-pack_tasks_id="{{node.pack_tasks_id}}"></div>
+      <div data-id="{{node.id}}" 
+        data-label="{{node.label}}" 
+        data-pack_guidebook_item_title="{{node.pack_guidebook_item_title}}" 
+        data-pack_guidebook_item_id="{{node.pack_guidebook_item_id}}" 
+        data-pack_guidebook_item_type="{{node.pack_guidebook_item_type}}">
+      </div>
       {% endfor %}
     </div>
 

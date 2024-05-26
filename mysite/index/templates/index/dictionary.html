@@ -19,19 +19,20 @@
 {% endblock %}
 
 {% block content %}
-<div class="dictionary">
-    <a href="#" class="dictionary_item dictionary_svg"><img src="{% static 'img/random-page.svg' %}"></a>
-    <form method="post" class="dictionary_item dictionary_form">
-        {% csrf_token %}
-        <select id="select-word" class="dictionary_select">
-            <option value="" selected hidden>Выберите слово</option>
-            <option></option>
-            {% for words in dictionarypage %}
-                <option>{{ words.word }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit" class="dictionary_item dictionary_button">Поиск</button>
-    </form>
+<div class="dict">
+  <div class="dictionary">
+      <a href="#" class="dictionary_item dictionary_svg"><img src="{% static 'img/random-page.svg' %}"></a>
+      <form method="post" class="dictionary_item dictionary_form">
+          {% csrf_token %}
+          <select id="select-word" class="dictionary_select" name="word" required>
+              {% for words in dictionarypage %}
+                  <option disabled selected>Выберите слово</option>
+                  <option>{{ words.word }}</option>
+              {% endfor %}
+          </select>
+          <button type="submit" class="dictionary_item dictionary_button">Поиск</button>
+      </form>
+  </div>
+  <div class="underText">Всегда можно стать лучше</div>
 </div>
-<div class="underText">Всегда можно стать лучше</div>
 {% endblock %}

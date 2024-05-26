@@ -6,6 +6,7 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
+from polymorphic.models import PolymorphicModel
 
 class UserManager(BaseUserManager):
   def create_user(self, email, name, password=None):
@@ -61,34 +62,47 @@ class User(AbstractBaseUser, PermissionsMixin):
 class GuidebookTopics(models.Model):
   name = models.CharField(max_length=255)
   child = models.ManyToManyField("self", blank=True, symmetrical=False)
-  url = models.URLField(max_length=255, blank=True)
-  theory_pack = models.ManyToManyField('Theory', blank=True)
-  task_pack = models.ManyToManyField('TaskSimple', blank=True)
-  
+  order = models.OneToOneField('GuidebookOrder', on_delete=models.CASCADE, blank=True, null=True)
+  guidebook_item = models.ManyToManyField('GuidebookItem', blank=True)
 
   def __str__(self):
     return self.name
     
-class PageTaskTheoryOther(models.Model):
+class GuidebookOrder(models.Model):
+  order_id = models.IntegerField(default=0)
+  id_guidebook_item = models.OneToOneField('GuidebookItem', on_delete=models.CASCADE, blank=True, null=True)
+
+class GuidebookItem(PolymorphicModel):
   title = models.CharField(max_length=255, default='Без названия')
-  author = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
+  author = models.ForeignKey('User', on_delete=models.CASCADE)
   
   def __str__(self):
     return self.title
   
-  class Meta:
-    abstract = True
 
-class TaskSimple(PageTaskTheoryOther):
+class TaskSimple(GuidebookItem):
+  """The class Task"""
   question = models.TextField(blank=True)
   answer = models.TextField(blank=True)
-  category = models.ManyToManyField('TaskCategory', related_name="tasks", blank=True)
+  category = models.ManyToManyField('TaskCategory', related_name="tasks")
 
+  def __repr__(self):
+    return f'<TaskSimple>'
   
-class Theory(PageTaskTheoryOther):
-  information = models.TextField(blank=True)
-  category = models.ManyToManyField('TaskCategory', related_name="theory", blank=True)
+class TaskDifficultАrchitecture(GuidebookItem):
+  """The class consists of TaskSimple"""
+  task_simple = models.ManyToManyField('TaskSimple', blank=True)
+  category = models.ManyToManyField('TaskCategory', related_name="tasksDifficultArchitecture")
 
+  def __repr__(self):
+    return f'<TaskDifficultАrchitecture>'
+  
+class Theory(GuidebookItem):
+  information = models.TextField(blank=True)
+  category = models.ManyToManyField('TaskCategory', related_name="theory")
+
+  def __repr__(self):
+    return f'<Theory>'
   
 class TaskCategory(models.Model):
   name = models.CharField(max_length=255)
@@ -101,18 +115,7 @@ class TaskCompleted(models.Model):
   task = models.ForeignKey('TaskSimple', on_delete=models.CASCADE, blank=True, null=True)
   completed = models.BooleanField(default=False)
 
-class DictionaryPage(Page):
-  word = models.TextField(blank=True)
-  image_word = models.ImageField(max_length=255, blank=True, upload_to='images/dictionary/')
-  body = RichTextField(blank=True)
-
-  content_panels = Page.content_panels + [
-    FieldPanel('body'),
-    FieldPanel('image_word'),
-    FieldPanel('word'),
-  ]
-
-  search_fields = Page.search_fields + [
-    index.SearchField('word'),
-  ]
+class DictionaryPage(models.Model):
+  word = models.CharField(max_length=255, default='Без названия')
+  information = models.TextField(default='Информация отсутсвует')
 

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
   'django_email_verification',
   
+  'polymorphic',
+
   'index',
 ]
 

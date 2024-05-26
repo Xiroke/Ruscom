@@ -11,7 +11,7 @@
 
 {% block content %}
 <div class="task">
-  {{question}}
+  <div class="task_question">{{question}}</div>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

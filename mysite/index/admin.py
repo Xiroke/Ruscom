@@ -9,6 +9,7 @@ admin.site.register(TaskSimple)
 admin.site.register(TaskCategory)
 admin.site.register(TaskCompleted)
 admin.site.register(Theory)
-
-
+admin.site.register(TaskDifficultАrchitecture)
+admin.site.register(GuidebookItem)
+admin.site.register(GuidebookOrder)
 #admin.site.register(GuidebookTopics)
