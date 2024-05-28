@@ -22,11 +22,25 @@
 
         <a href="{% url 'profileUrl' %}" class="profile">Профиль</a>
 
-        <div class="gamburger"><img src="{% static 'img/gamburger.svg'%}"></div>
+        <div class="hamburger">
+          <img src="{% static 'img/gamburger.svg'%}">
+        </div>
+
+        <div class="hamburger_overlay">
+          <div class="hamburger_menu">
+            <a href="{% url 'homeUrl'%}" class="hamburger_item">Главная</a>
+            <a href="{% url 'guidebook_graphUrl' %}" class="hamburger_item">Учебник</a> 
+            <a href="{% url 'dictionaryUrl' %}" class="hamburger_item">Словарь</a> 
+            <a href="{% url 'testsUrl' filter='all'%}" class="hamburger_item">Тесты</a>
+            <a href="{% url 'profileUrl' %}" class="hamburger_item">Профиль</a> 
+          </div>
+        </div>
+        
     </nav>
 
     {% block content %}
     
     {% endblock %}
+    <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

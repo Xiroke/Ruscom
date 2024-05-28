@@ -1,1 +1,81 @@
-body{background-color:#edeff5}.up_curve{margin-top:40px;width:100%;overflow:hidden}.up_curve .curve{width:100000%;height:200px;background-image:url("../img/sin.svg");background-repeat:repeat-x;animation:move_line 5000s linear infinite}@keyframes move_line{0%{transform:translateX(0%)}100%{transform:translateX(-40%)}}.tests_search input,.tests_search button{margin:20px auto 0 auto}.tests_task{margin:20px auto 0 auto;display:flex;height:120px;width:70%;background-color:#fff;border-radius:15px;align-items:center}.tests_task_author,.tests_task_date,.tests_task_title,.tests_task_categories{line-height:100px;text-align:center;display:block;height:100px;margin:auto 0 auto 0;color:#1d1e33;padding:0 20px;border-right:1px solid #1d1e33}.tests_task_author span,.tests_task_date span,.tests_task_title span,.tests_task_categories span{line-height:normal;display:inline-block;vertical-align:middle}.tests_task_categories{line-height:0;display:flex;flex-wrap:wrap;font-size:12px;max-width:40%;max-height:120px;overflow-y:auto}.tests_task_categories_category{margin-top:5px;margin-left:15px}.tests_task_categories_category span{padding:2px 10px;background-color:#cecfda;border-radius:5px}.tests_task_black-square{margin:auto 0 auto 20px;background-color:#1d1e33;height:100px;width:20px;border-radius:5px}.tests_task_btn{margin-left:auto;margin-right:20px}
+body {
+  background-color: #edeff5;
+}
+
+.up_curve {
+  margin-top: 40px;
+  width: 100%;
+  overflow: hidden;
+}
+.up_curve .curve {
+  width: 100000%;
+  height: 200px;
+  background-image: url("../img/sin.svg");
+  background-repeat: repeat-x;
+  animation: move_line 5000s linear infinite;
+}
+
+@keyframes move_line {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-40%);
+  }
+}
+.tests_search input, .tests_search button {
+  margin: 20px auto 0 auto;
+}
+.tests_task {
+  margin: 20px auto 0 auto;
+  display: flex;
+  height: 120px;
+  width: 70%;
+  background-color: #fff;
+  border-radius: 15px;
+  align-items: center;
+}
+.tests_task_author, .tests_task_date, .tests_task_title, .tests_task_categories {
+  line-height: 100px;
+  text-align: center;
+  display: block;
+  height: 100px;
+  margin: auto 0 auto 0;
+  color: #1D1E33;
+  padding: 0 20px;
+  border-right: 1px solid #1D1E33;
+}
+.tests_task_author span, .tests_task_date span, .tests_task_title span, .tests_task_categories span {
+  line-height: normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+.tests_task_categories {
+  line-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+  max-width: 40%;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.tests_task_categories_category {
+  margin-top: 5px;
+  margin-left: 15px;
+}
+.tests_task_categories_category span {
+  padding: 2px 10px;
+  background-color: #cecfda;
+  border-radius: 5px;
+}
+.tests_task_black-square {
+  margin: auto 0 auto 20px;
+  background-color: #1D1E33;
+  height: 100px;
+  width: 20px;
+  border-radius: 5px;
+}
+.tests_task_btn {
+  margin-left: auto;
+  margin-right: 20px;
+}

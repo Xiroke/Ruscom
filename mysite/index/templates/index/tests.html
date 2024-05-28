@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-
+Тесты
 {% endblock %}
 
 {% block link %}
@@ -14,15 +14,15 @@
   <div class="curve">
   </div>
 </div>
-<!--
-<div class="tests_search">
+
+<!-- <div class="tests_search"> in the futurew
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Найти</button>
   </form>
-</div>
--->
+</div> -->
+
 <div class="tests_tasks">
   {% for task in tasks %}
   <div class="tests_task">
@@ -35,7 +35,7 @@
     {% endfor %}
     </div>
     <div class="tests_task_description"><span>{{ task.description }}</span></div>
-    <a href="{% url 'task_itemUrl' task.id %}" class="tests_task_btn"><button class="test_task_btn btn-medium">Решить</button></a>
+    <a href="{% url 'task_itemUrl' task.id %}" class="tests_task_a"><button class="tests_task_btn btn-medium">Решить</button></a>
   </div>
   {% endfor %}
 </div>

@@ -96,6 +96,9 @@ def guidebook_graph(request):
 
 
 def guidebook_item_view(request, id):
+  """
+  Displaying the theory of tasks
+  """
   if not request.user.is_authenticated:
     return redirect('sign_inUrl')
   
@@ -167,7 +170,7 @@ def dictionary_word_view(request, id):
 
   return render(request, 'index/dictionary_word.html', {'word': word})
 
-def tests_view(request, filter='all', filter_value = None):
+def tests_view(request, filter='all', filter_value = None): 
   if request.method == 'POST':
     form = SearchTestsForm(data=request.POST)
     if form.is_valid():
@@ -191,3 +194,6 @@ def tests_view(request, filter='all', filter_value = None):
 
 def secret_game_view(request):
   return render(request, 'index/secret_game.html')
+
+def renpy_game_view(request):
+  return render(request, 'index/renpy_game.html')
