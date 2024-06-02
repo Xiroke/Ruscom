@@ -53,6 +53,10 @@ nav a:hover {
   transition-duration: 0.5s;
 }
 
+footer {
+  margin-top: 50px;
+}
+
 .footer-container {
   display: flex;
   flex-wrap: wrap;

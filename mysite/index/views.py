@@ -136,7 +136,16 @@ def guidebook_item_view(request, id):
     
     if request.method == 'POST':
       for enum, item in enumerate(request.POST.getlist('answer')):
-        accuracy.append(item.lower() == task_object.task_simple.all()[enum].answer.lower())
+        if item.lower() == task_object.task_simple.all()[enum].answer.lower():
+          accuracy.append(True)
+          if not TaskCompleted.objects.filter(user=request.user, task=task_object.task_simple.all()[enum]).exists():
+            request.user.score += 1
+            TaskCompleted.objects.create(user=request.user, task=task_object.task_simple.all()[enum], completed=True)
+            request.user.save()
+        else:
+          accuracy.append(False)
+        
+
       return render(request, 'index/task_difficult_architecture_completed.html', {'data': zip(request.POST.getlist('answer'), accuracy)})
       
     else:
@@ -172,17 +181,18 @@ def tests_view(request, filter='all', filter_value = None):
   if request.method == 'POST':
     form = SearchTestsForm(data=request.POST)
     if form.is_valid():
+ 
       tests = GuidebookItem.objects.filter(title__icontains=form.cleaned_data['title'])
       return redirect('testsUrl', filter=form.cleaned_data['title'])
   else:
 
     if filter_value is not None:
       match filter:
-        case 'category':  tasks = GuidebookItem.objects.filter(category=TaskCategory.objects.filter(name=filter_value))
+        case 'category':  tasks = TaskDifficultАrchitecture.objects.filter(category=TaskCategory.objects.filter(name=filter_value))
     else:
       match filter:
-        case 'all': tasks = GuidebookItem.objects.all()
-        case 'random': tasks = GuidebookItem.objects.order_by('?')
+        case 'all': tasks = TaskDifficultАrchitecture.objects.all()
+        case 'random': tasks = TaskDifficultАrchitecture.objects.order_by('?')
         
     form = SearchTestsForm()
   return render(request, 'index/tests.html', {'form': form, 'tasks': tasks})
