@@ -41,6 +41,49 @@
     {% block content %}
     
     {% endblock %}
+    {% block footer %}
+    <footer>
+      <div class="footer-container">
+        <!-- Contact Information -->
+        <div class="footer-section contact-info">
+          <h4>Контакты:</h4>
+          <p><strong>Электронная почта:</strong> <a href="mailto:ruscomsite@gmail.com">ruscomsite@gmail.com</a></p>
+        </div>
+    
+        <!-- Useful Links -->
+        <div class="footer-section useful-links">
+          <h4>Полезные ссылки:</h4>
+          <ul>
+            <li><a href="#">Главная страница</a></li>
+            <li><a href="#">Учебник</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+            <li><a href="#">Условия использования</a></li>
+          </ul>
+        </div>
+    
+        <!-- Social Media Links -->
+        <div class="footer-section social-media">
+          <h4>Подпишитесь на нас:</h4>
+          <ul>
+            <li><a href="#">Telegram</a></li>
+          </ul>
+        </div>
+    
+        <!-- Newsletter Subscription -->
+        <div class="footer-section newsletter">
+          <h4>Подпишитесь на нашу рассылку:</h4>
+          <form action="#">
+            <input type="email" placeholder="Ваш email" required>
+            <button type="submit">Подписаться</button>
+          </form>
+        </div>
+    
+      <!-- Copyright -->
+      <div class="footer-bottom">
+        <p>© 2024 Ruscom.com. Все права защищены.</p>
+      </div>
+    </footer>
+    {% endblock %}
     <script src="{% static 'js/base.js' %}"></script>
 </body>
 </html>

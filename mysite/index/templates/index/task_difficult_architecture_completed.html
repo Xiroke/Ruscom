@@ -11,18 +11,20 @@
 
 {% block content %}
 <div class="task">
-  {% for answer, accuracy in data %}
-    {% if accuracy %}
-      <div class="task_item">
-        <div class="answer-status">Вы ответили правильно и заработали +1 очко за каждое задание</div>
-        <div class="user-answer-true">Ваш Ответ: <span>{{answer}}</span></div>
-      </div>
-    {% else %}
-      <div class="task_item">
-        <div class="answer-status">Вы ответили неправильно</div>
-        <div class="user-answer-false">Ваш Ответ: <span>{{answer}}</span></div>
-      </div>
-    {% endif %}
-  {% endfor %}
+  <div class="task_block">
+    {% for answer, accuracy in data %}
+      {% if accuracy %}
+        <div class="task_item">
+          <div class="answer-status">Вы ответили правильно и заработали +1 очко за каждое задание</div>
+          <div class="user-answer-true">Ваш Ответ: <span>{{answer}}</span></div>
+        </div>
+      {% else %}
+        <div class="task_item">
+          <div class="answer-status">Вы ответили неправильно</div>
+          <div class="user-answer-false">Ваш Ответ: <span>{{answer}}</span></div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

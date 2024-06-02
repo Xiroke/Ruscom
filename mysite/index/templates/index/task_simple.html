@@ -11,11 +11,13 @@
 
 {% block content %}
 <div class="task">
-  <div class="task_question">{{question}}</div>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn-small">Ответить</button>
-  </form>
+  <div class="task_block">
+    <div class="task_question">{{question}}</div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-small">Ответить</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

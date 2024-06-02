@@ -5,6 +5,17 @@
 Профиль
 {% endblock %}
 
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/profile.min.css' %}">
+{% endblock %}
+
 {% block content %}
-<a href="{% url 'logoutUrl' %}"><button class="btn-medium">Выйти</button></a>
+<div class="user-profile">
+  <div class="user-profile_information">
+    <h1>Профиль</h1>
+    <div class="user-profile_name">Ваше имя: {{ user.name }}</div>
+    <div class="amount_point">Количество очков: {{ user.score }}</div>
+  </div>
+  <a href="{% url 'logoutUrl' %}" class="user-profile_logout"><button class="btn-medium">Выйти</button></a>
+</div>
 {% endblock %}

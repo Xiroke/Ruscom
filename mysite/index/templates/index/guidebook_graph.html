@@ -11,7 +11,7 @@
   </head>
   <body>
     <a class="leave" href="{% url 'homeUrl' %}">
-      <img src="{% static 'img/leave.svg' %}" width="30px" height="30px">
+      <img src="{% static 'img/leave.svg' %}" >
     </a>
     <div id="graph-container"></div>
     
@@ -40,7 +40,10 @@
       <div data-source="{{link.from}}" data-target="{{link.to}}"></div>
       {% endfor %}
     </div>
+  
+    {% block footer %}
 
+    {% endblock %}
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="{% static 'js/guidebook_graph.js' %}"></script>
   </body>

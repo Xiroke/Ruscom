@@ -91,7 +91,6 @@ def guidebook_graph(request):
   }
   data["nodes"].append({'id': topics.name, 'label': topics.name})
   data = get_children(topics, data)
-  print(data['nodes'])
   return render(request, 'index/guidebook_graph.html', {'data': data}, )
 
 
@@ -138,7 +137,6 @@ def guidebook_item_view(request, id):
     if request.method == 'POST':
       for enum, item in enumerate(request.POST.getlist('answer')):
         accuracy.append(item.lower() == task_object.task_simple.all()[enum].answer.lower())
-        print(accuracy)
       return render(request, 'index/task_difficult_architecture_completed.html', {'data': zip(request.POST.getlist('answer'), accuracy)})
       
     else:
@@ -177,7 +175,6 @@ def tests_view(request, filter='all', filter_value = None):
       tests = GuidebookItem.objects.filter(title__icontains=form.cleaned_data['title'])
       return redirect('testsUrl', filter=form.cleaned_data['title'])
   else:
-    print(filter)
 
     if filter_value is not None:
       match filter:
@@ -188,7 +185,6 @@ def tests_view(request, filter='all', filter_value = None):
         case 'random': tasks = GuidebookItem.objects.order_by('?')
         
     form = SearchTestsForm()
-    print(tasks)
   return render(request, 'index/tests.html', {'form': form, 'tasks': tasks})
   
 

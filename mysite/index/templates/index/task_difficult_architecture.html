@@ -11,16 +11,17 @@
 
 {% block content %}
 <div class="task">
-  <form method="post">
-    
-  {% for form, question in item %}
-    <div class="task_question">{{question}}</div>
-    
-      {% csrf_token %}
-      {{ form.as_p }}
+  <div class="task_block">
+    <form method="post">
+    {% for form, question in item %}
+      <div class="task_question">{{question}}</div>
+      
+        {% csrf_token %}
+        {{ form.as_p }}
 
-  {% endfor %}
-  <button type="submit" class="btn-small">Ответить</button>
-  </form>
+    {% endfor %}
+    <button type="submit" class="btn-small">Ответить</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

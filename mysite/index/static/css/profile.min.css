@@ -1,0 +1,25 @@
+body {
+  background-color: #edeff5;
+}
+
+.user-profile {
+  width: 40%;
+  background-color: #fff;
+  height: 60vh;
+  display: block;
+  margin: 50px auto 100px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+.user-profile_logout {
+  display: block;
+  margin: auto auto 20px auto;
+}
+
+@media (max-width: 480px) {
+  .user-profile {
+    width: 80%;
+  }
+}
