@@ -17,4 +17,6 @@ urlpatterns = [
   path('tests/<str:filter>/<str:filter_value>/', views.tests_view, name='testsUrl'),
   path("renpy_game/", views.renpy_game_view, name="renpy_gameUrl"),
   path('secret_game/', views.secret_game_view, name='secret_gameUrl'),
+  path('products/', views.products_view, name='productsUrl'),
+  path('products/<str:file>/', views.products_file_view, name='productsFileUrl'),
 ]

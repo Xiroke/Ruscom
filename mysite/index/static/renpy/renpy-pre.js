@@ -354,7 +354,7 @@ Module.preRun = Module.preRun || [ ];
     async function loadGameZip() {
 
         try {
-            let response = await fetch('../static/renpy/game.zip');
+            let response = await fetch('/static/renpy/game.zip');
 
             if (!response.ok) {
                 reportError("Could not load game.zip: " + response.status + " " + response.statusText);
@@ -605,7 +605,6 @@ Module.preRun = Module.preRun || [ ];
     window.onSavegamesExport = onSavegamesExport;
 
     function FSDownload(filename, mimetype) {
-        console.log('download', filename);
         var a = document.createElement('a');
         a.download = filename.replace(/.*\//, '');
         try {
@@ -809,7 +808,6 @@ Module.preRun = Module.preRun || [ ];
      * @return A string giving the result of the fetch. The first word is the status, which is one of "OK", "ERROR", or "PENDING", followed by the HTTP status code and status text.
      */
     function fetchFile(method, url, inFile, outFile, inContentType) {
-
         let id = fetchId++;
         fetchResult[id] = "PENDING Fetch in progress.";
 
@@ -826,7 +824,7 @@ Module.preRun = Module.preRun || [ ];
                 }
 
                 let response = await fetch(url, options);
-
+                
                 if (response.ok) {
                     if (outFile) {
                         let ab = await response.arrayBuffer();

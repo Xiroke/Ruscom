@@ -15,6 +15,7 @@ body {
   margin: 20px 0;
 }
 .task input {
+  margin-bottom: 50px;
   width: 40%;
   box-sizing: border-box;
   margin-top: 10px;

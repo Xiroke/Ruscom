@@ -61,6 +61,9 @@ svg {
 }
 
 .tooltip {
+  padding: 35px;
+  height: 700px;
+  overflow-y: scroll;
   position: absolute;
   display: block;
   top: 10%;

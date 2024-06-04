@@ -67,7 +67,7 @@ def sign_up_view(request):
 
       # Create new user
       user = get_user_model().objects.create_user(name=user_name, email=user_email, password=user_password)
-      user.is_active = False
+      #user.is_active = False
       send_email(user)
 
       return HttpResponseRedirect(reverse('sign_inUrl'))
@@ -203,3 +203,13 @@ def secret_game_view(request):
 
 def renpy_game_view(request):
   return render(request, 'index/renpy_game.html')
+
+def products_view(request):
+  return render(request, 'index/products.html')
+
+def products_file_view(request, file):
+  if file[-1: -4: -1] == 'fdp': #pdf reverse
+    url = 'products/' + file + '/'
+    return render(request, 'index/products_pdf.html', {'url': url})
+  else:
+    return redirect('productsUrl')

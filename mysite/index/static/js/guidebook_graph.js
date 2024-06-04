@@ -74,7 +74,7 @@ const node = container
   .data(graphData.nodes)
   .join("circle")
   .attr("r", (d) => (d.label === "Ruscom" ? 30 : 20))
-  .attr("fill", "#9f9f9f")
+  .attr("fill", "#515266")
   .on("click", (event, d) => showNodeTooltip(event, d))
   .call(
     d3.drag()
