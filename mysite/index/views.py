@@ -209,7 +209,7 @@ def products_view(request):
 
 def products_file_view(request, file):
   if file[-1: -4: -1] == 'fdp': #pdf reverse
-    url = 'products/' + file + '/'
+    url = 'products/' + file
     return render(request, 'index/products_pdf.html', {'url': url})
   else:
     return redirect('productsUrl')

@@ -8,7 +8,11 @@
 </head>
 <body>
   <object data="{% static url %}" type="application/pdf" width="100%" height="800px">
-    <p>Alternative text - include a link <a href="products/Продукт-ИС-172.pdf">to the PDF!</a></p>
+    <p>Alternative text - include a link <a href="{% static url %}">to the PDF!</a></p>
+    <p>
+    Или скопируйте эту ссылку и вставьте в адресную строку браузера
+    https://ruscomsite.tw1.ru/{% static url %}
+    </p>
   </object>
 </body>
 </html>

@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from config import (POSTGRESQL_ENGINE, 
+                    POSTGRESQL_NAME, 
+                    POSTGRESQL_USER, 
+                    POSTGRESQL_PASSWORD, 
+                    POSTGRESQL_HOST, 
+                    POSTGRESQL_PORT,
+                    EMAIL_HOST_PASSWORD,)
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -91,10 +98,21 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
+# DATABASES = {
+#   "default": {
+#       "ENGINE": "django.db.backends.sqlite3",
+#       "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#   }
+# }
+
 DATABASES = {
   "default": {
-      "ENGINE": "django.db.backends.sqlite3",
-      "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+      "ENGINE": POSTGRESQL_ENGINE,
+      "NAME": POSTGRESQL_NAME,
+      "USER": POSTGRESQL_USER,
+      "PASSWORD": POSTGRESQL_PASSWORD,
+      "HOST": POSTGRESQL_HOST,
+      "PORT": POSTGRESQL_PORT,
   }
 }
 
@@ -206,7 +224,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ruscomsite@gmail.com'
-EMAIL_HOST_PASSWORD = 'oxgmsktsfjsjwfan'
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'ruscomsite@gmail.com'
 SERVER_EMAIL = 'ruscomsite@gmail.com'

@@ -1,0 +1,16 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
+
+POSTGRESQL_ENGINE = os.getenv('POSTGRESQL_ENGINE')
+POSTGRESQL_NAME = os.getenv('POSTGRESQL_NAME')
+POSTGRESQL_USER = os.getenv('POSTGRESQL_USER')
+POSTGRESQL_PASSWORD = os.getenv('POSTGRESQL_PASSWORD')
+POSTGRESQL_HOST = os.getenv('POSTGRESQL_HOST')
+POSTGRESQL_PORT = os.getenv('POSTGRESQL_PORT')
+
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
