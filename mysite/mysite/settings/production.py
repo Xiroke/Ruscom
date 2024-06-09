@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = bool(os.environ.get("DEBUG", default=0))
 
 try:
     from .local import *
