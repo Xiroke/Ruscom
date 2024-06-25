@@ -2,7 +2,4 @@
 
 Ruscom is a website aimed at learning the Russian language. It is written on the django framework with the postgres database
 
-Link at the time of 06/02/2024
-```
-https://ruscomsite.tw1.ru
-```
+
