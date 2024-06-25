@@ -12,16 +12,16 @@
 </head>
 <body>
     <nav>
-        <a href="{% url 'homeUrl'%}" class="home"><img src="{% static 'img/Ruscom-logo.svg' %}", height="30px", width="40px"></a>
+        <a href="{% url 'home'%}" class="home"><img src="{% static 'img/Ruscom-logo.svg' %}", height="30px", width="40px"></a>
 
         <div class="main">
-            <a href="{% url 'guidebook_graphUrl' %}">Учебник</a> 
-            <a href="{% url 'dictionaryUrl' %}">Словарь</a> 
-            <a href="{% url 'testsUrl' filter='all'%}">Тесты</a> 
-            <a href="{% url 'productsUrl' %}">Продукты</a>
+            <a href="{% url 'guidebook_graph' %}">Учебник</a> 
+            <a href="{% url 'dictionary' %}">Словарь</a> 
+            <a href="{% url 'tasks' %}">Тесты</a> 
+            <a href="{% url 'products' %}">Продукты</a>
         </div>
 
-        <a href="{% url 'profileUrl' %}" class="profile">Профиль</a>
+        <a href="{% url 'profile' %}" class="profile">Профиль</a>
 
         <div class="hamburger">
           <img src="{% static 'img/gamburger.svg'%}">
@@ -29,12 +29,12 @@
 
         <div class="hamburger_overlay">
           <div class="hamburger_menu">
-            <a href="{% url 'homeUrl'%}" class="hamburger_item">Главная</a>
-            <a href="{% url 'guidebook_graphUrl' %}" class="hamburger_item">Учебник</a> 
-            <a href="{% url 'dictionaryUrl' %}" class="hamburger_item">Словарь</a> 
-            <a href="{% url 'testsUrl' filter='all'%}" class="hamburger_item">Тесты</a>
-            <a href="{% url 'productsUrl' %}" class="hamburger_item">Продукты</a>
-            <a href="{% url 'profileUrl' %}" class="hamburger_item">Профиль</a> 
+            <a href="{% url 'home'%}" class="hamburger_item">Главная</a>
+            <a href="{% url 'guidebook_graph' %}" class="hamburger_item">Учебник</a> 
+            <a href="{% url 'dictionary' %}" class="hamburger_item">Словарь</a> 
+            <a href="{% url 'tasks' %}" class="hamburger_item">Тесты</a>
+            <a href="{% url 'products' %}" class="hamburger_item">Продукты</a>
+            <a href="{% url 'profile' %}" class="hamburger_item">Профиль</a> 
           </div>
         </div>
         

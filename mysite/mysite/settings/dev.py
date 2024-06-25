@@ -4,6 +4,8 @@ from config import (SECRET_KEY, ALLOWED_HOSTS)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
+SECRET_KEY = SECRET_KEY
+ALLOWED_HOSTS = ALLOWED_HOSTS
 # SECURITY WARNING: keep the secret key used in production secret!
 
 

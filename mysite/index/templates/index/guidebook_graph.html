@@ -10,7 +10,7 @@
     <title>Граф</title>
   </head>
   <body>
-    <a class="leave" href="{% url 'homeUrl' %}">
+    <a class="leave" href="{% url 'home' %}">
       <img src="{% static 'img/leave.svg' %}" >
     </a>
     <div id="graph-container"></div>
@@ -25,21 +25,9 @@
     <div class="overlay" onclick="hideNodeTooltip()"></div>
 
     <div id="node-data">
-      {% for node in data.nodes %}
-      <div data-id="{{node.id}}" 
-        data-label="{{node.label}}" 
-        data-pack_guidebook_item_title="{{node.pack_guidebook_item_title}}" 
-        data-pack_guidebook_item_id="{{node.pack_guidebook_item_id}}" 
-        data-pack_guidebook_item_type="{{node.pack_guidebook_item_type}}">
-      </div>
-      {% endfor %}
+      {{data|json_script:"node-data-script"}}
     </div>
 
-    <div id="link-data">
-      {% for link in data.links %}
-      <div data-source="{{link.from}}" data-target="{{link.to}}"></div>
-      {% endfor %}
-    </div>
   
     {% block footer %}
 

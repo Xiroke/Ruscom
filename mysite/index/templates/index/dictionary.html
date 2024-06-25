@@ -26,8 +26,8 @@
           {% csrf_token %}
           <select id="select-word" class="dictionary_select" name="word" required>
             <option disabled selected>Выберите слово</option>
-              {% for words in dictionarypage %}
-                  <option>{{ words.word }}</option>
+              {% for item in dictionary %}
+                  <option>{{ item.word }}</option>
               {% endfor %}
           </select>
           <button type="submit" class="dictionary_item dictionary_button">Поиск</button>

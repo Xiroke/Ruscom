@@ -35,7 +35,7 @@
     {% endfor %}
     </div>
     <div class="tests_task_description"><span>{{ task.description }}</span></div>
-    <a href="{% url 'task_itemUrl' task.id %}" class="tests_task_a"><button class="tests_task_btn btn-medium">Решить</button></a>
+    <a href="{% url 'task_item' task.id %}" class="tests_task_a"><button class="tests_task_btn btn-medium">Решить</button></a>
   </div>
   {% endfor %}
 </div>

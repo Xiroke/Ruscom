@@ -54,8 +54,10 @@ INSTALLED_APPS = [
   "django.contrib.staticfiles",
 
   'django_email_verification',
-  
+  'django.contrib.postgres',
+
   'polymorphic',
+  'rest_framework',
 
   'index',
 ]
@@ -111,7 +113,7 @@ DATABASES = {
       "NAME": POSTGRESQL_NAME,
       "USER": POSTGRESQL_USER,
       "PASSWORD": POSTGRESQL_PASSWORD,
-      "HOST": "POSTGRESQL_HOST",
+      "HOST": POSTGRESQL_HOST,
       "PORT": POSTGRESQL_PORT,
   }
 }
@@ -229,3 +231,5 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'ruscomsite@gmail.com'
 SERVER_EMAIL = 'ruscomsite@gmail.com'
 
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/sign_in/'

@@ -16,6 +16,9 @@
     <div class="user-profile_name">Ваше имя: {{ user.name }}</div>
     <div class="amount_point">Количество очков: {{ user.score }}</div>
   </div>
-  <a href="{% url 'logoutUrl' %}" class="user-profile_logout"><button class="btn-medium">Выйти</button></a>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="user-profile_logout btn-medium">Выйти</button>
+  </form>
 </div>
 {% endblock %}

@@ -59,20 +59,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     return True
   
   
-class GuidebookTopics(models.Model):
+class GuidebookTopicsModel(models.Model):
   name = models.CharField(max_length=255)
   child = models.ManyToManyField("self", blank=True, symmetrical=False)
-  order = models.OneToOneField('GuidebookOrder', on_delete=models.CASCADE, blank=True, null=True)
-  guidebook_item = models.ManyToManyField('GuidebookItem', blank=True)
+  guidebook_item = models.ManyToManyField('GuidebookItemModel', blank=True)
 
   def __str__(self):
     return self.name
     
-class GuidebookOrder(models.Model):
-  order_id = models.IntegerField(default=0)
-  id_guidebook_item = models.OneToOneField('GuidebookItem', on_delete=models.CASCADE, blank=True, null=True)
-
-class GuidebookItem(PolymorphicModel):
+class GuidebookItemModel(PolymorphicModel):
   title = models.CharField(max_length=255, default='Без названия')
   author = models.ForeignKey('User', on_delete=models.CASCADE)
   
@@ -80,42 +75,42 @@ class GuidebookItem(PolymorphicModel):
     return self.title
   
 
-class TaskSimple(GuidebookItem):
+class TaskSimpleModel(GuidebookItemModel):
   """The class Task"""
   question = models.TextField(blank=True)
   answer = models.TextField(blank=True)
-  category = models.ManyToManyField('TaskCategory', related_name="tasks")
+  category = models.ManyToManyField('TaskCategoryModel', related_name="tasks")
 
   def __repr__(self):
     return f'<TaskSimple>'
   
-class TaskDifficultАrchitecture(GuidebookItem):
+class TaskDifficultАrchitectureModel(GuidebookItemModel):
   """The class consists of TaskSimple"""
-  task_simple = models.ManyToManyField('TaskSimple', blank=True)
-  category = models.ManyToManyField('TaskCategory', related_name="tasksDifficultArchitecture")
+  task_simple = models.ManyToManyField('TaskSimpleModel', blank=True)
+  category = models.ManyToManyField('TaskCategoryModel', related_name="tasksDifficultArchitectureModel")
 
   def __repr__(self):
-    return f'<TaskDifficultАrchitecture>'
+    return f'<TaskDifficultАrchitectureModel>'
   
-class Theory(GuidebookItem):
+class TheoryModel(GuidebookItemModel):
   information = models.TextField(blank=True)
-  category = models.ManyToManyField('TaskCategory', related_name="theory")
+  category = models.ManyToManyField('TaskCategoryModel', related_name="theory")
 
   def __repr__(self):
     return f'<Theory>'
   
-class TaskCategory(models.Model):
+class TaskCategoryModel(models.Model):
   name = models.CharField(max_length=255)
 
   def __str__(self):
     return self.name
   
-class TaskCompleted(models.Model):
+class TaskCompletedModel(models.Model):
   user = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, null=True)
-  task = models.ForeignKey('TaskSimple', on_delete=models.CASCADE, blank=True, null=True)
+  task = models.ForeignKey('TaskSimpleModel', on_delete=models.CASCADE, blank=True, null=True)
   completed = models.BooleanField(default=False)
 
-class DictionaryPage(models.Model):
+class DictionaryModel(models.Model):
   word = models.CharField(max_length=255, default='Без названия')
   information = models.TextField(default='Информация отсутсвует')
 

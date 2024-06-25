@@ -1,35 +1,19 @@
-// Функция для получения данных узлов (node) графа из HTML
 function getNodeDataFromHTML() {
-  return Array.from(document.querySelectorAll("#node-data > div")).map(
-    (div) => ({
-      id: div.getAttribute("data-id"),
-      label: div.getAttribute("data-label"),
-      guidebook_item_title: div.getAttribute("data-pack_guidebook_item_title").split("[").join('').split("]").join('').split("'").join('').split(', '),
-      guidebook_item_id: div.getAttribute("data-pack_guidebook_item_id").split("[").join('').split("]").join('').split(', '),
-      guidebook_item_type: div.getAttribute("data-pack_guidebook_item_type").split("[").join('').split("]").join('').split(">").join('').split('<').join('').split(', '),
-      angle: Math.random() * 2 * Math.PI,
-      radius: (Math.random() + 0.4) * 300,
-    })
-  );
+  const nodes = JSON.parse(document.getElementById("node-data-script").textContent).nodes;
+  return nodes;
 }
 
-// Функция для получения данных связей (link) графа из HTML
 function getLinkDataFromHTML() {
-  return Array.from(document.querySelectorAll("#link-data > div")).map(
-    (div) => ({
-      source: div.getAttribute("data-source"),
-      target: div.getAttribute("data-target"),
-    })
-  );
+  const links = JSON.parse(document.getElementById("node-data-script").textContent).links;
+  return links;
 }
 
-// Получаем данные узлов и связей графа из HTML
 const graphData = {
   nodes: getNodeDataFromHTML(),
   links: getLinkDataFromHTML(),
 };
 
-// Создание SVG элемента для отображения графа
+
 const svg = d3
   .select("#graph-container")
   .append("svg")
@@ -41,12 +25,11 @@ const svg = d3
 
 const container = svg.append("g");
 
-// Функция для масштабирования и перетаскивания
 function zoomed(event) {
   container.attr("transform", event.transform);
 }
 
-// Создание симуляции силового графа
+
 const simulation = d3
   .forceSimulation(graphData.nodes)
   .force(
@@ -58,7 +41,6 @@ const simulation = d3
   .alphaDecay(0.02)
   .on("tick", ticked);
 
-// Отрисовка связей (links) на SVG элементе
 const link = container
   .append("g")
   .attr("stroke", "#999")
@@ -67,7 +49,6 @@ const link = container
   .data(graphData.links)
   .join("line");
 
-// Отрисовка узлов (nodes) на SVG элементе
 const node = container
   .append("g")
   .selectAll("circle")
@@ -83,7 +64,6 @@ const node = container
       .on("end", dragended)
   );
 
-// Скрытие всплывающего окна при клике вне узла
 document.addEventListener("click", (event) => {
   const tooltip = document.querySelector(".tooltip");
   if (tooltip.style.display !== "none" && !event.target.closest(".tooltip")) {
@@ -91,7 +71,6 @@ document.addEventListener("click", (event) => {
   }
 });
 
-// Добавление текста с названием узла рядом с каждым узлом
 const text = container
   .append("g")
   .selectAll("text")
@@ -101,13 +80,10 @@ const text = container
   .attr("text-anchor", "middle")
   .attr("class", "node-text");
 
-// Добавление всплывающих подсказок к узлам
 node.append("title").text((d) => d.label);
 
-// Переменные для вращения узлов вокруг центра
 const rotationSpeed = 0.002;
 
-// Функция для обновления позиций узлов и связей в графе
 function ticked() {
   link
     .attr("x1", (d) => d.source.x)
@@ -118,11 +94,8 @@ function ticked() {
   node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
   text.attr("x", (d) => d.x).attr("y", (d) => d.y + 40);
-  text.attr("text-anchor", "middle");
-  text.attr("class", "node-text");
 }
 
-// Функции для перетаскивания узлов
 function dragstarted(event, d) {
   if (!event.active) simulation.alphaTarget(0.3).restart();
   d.fx = d.x;
@@ -144,12 +117,11 @@ function createObjectOfPack(parent, pack_title, pack_id, pack_type) {
   let theories = document.createElement('div');
   let tasks = document.createElement('div');
   theories.className = 'tooltip_theories';
-  theories.innerHTML = 'Теория';
-  tasks.innerHTML = 'Задание';
+  theories.innerHTML = 'Theory';
+  tasks.innerHTML = 'Task';
   tasks.className = 'tooltip_tasks';
   for (let i = 0; i < pack_title.length; i++) {
     if (pack_title[i] != "") {
-      
       let task = document.createElement('div');
       let url = document.createElement('a');
       url.href = '../task_item/' + pack_id[i];
@@ -157,7 +129,6 @@ function createObjectOfPack(parent, pack_title, pack_id, pack_type) {
       task.classList.add('tooltip_task');
       url.classList.add('tooltip_task_url');
       url.appendChild(task);
-      console.log(pack_type[i])
       switch (pack_type[i]) {
         case 'Theory':
           theories.appendChild(url);
@@ -165,15 +136,12 @@ function createObjectOfPack(parent, pack_title, pack_id, pack_type) {
         case 'TaskSimple':
           tasks.appendChild(url);
           break;
-
         case 'TaskDifficultАrchitecture':
           tasks.appendChild(url);
           break;
       }
       parent.appendChild(theories);
       parent.appendChild(tasks);
-    } else {
-      console.log('')
     }
   }
 }
@@ -187,7 +155,7 @@ function showNodeTooltip(event, d) {
   let tooltip_item = document.createElement('div');
   tooltip_item.className = 'tooltip_item';
   tooltip.appendChild(tooltip_item);
-  createObjectOfPack(tooltip_item, d.guidebook_item_title, d.guidebook_item_id, d.guidebook_item_type);
+  createObjectOfPack(tooltip_item, d.pack_guidebook_item_title, d.pack_guidebook_item_id, d.pack_guidebook_item_type);
 
   tooltipLabel.innerHTML = d.label;
 

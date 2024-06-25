@@ -19,7 +19,8 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path('email/', include(email_urls), name='email-verification'),
 
-    path('', include('index.urls'))
+    path('', include('index.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 
@@ -36,6 +37,7 @@ urlpatterns = urlpatterns + [
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
     path("", include(wagtail_urls)),
+
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:
     #    path("pages/", include(wagtail_urls)),

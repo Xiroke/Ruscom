@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sign.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="sign">
+    <div class="sign_img">
+        <img src="{% static 'img/sign.png' %}">
+    </div>
+    <div class="sign_form">
+        
+        <div class="sign_form_logo"><img src="{% static 'img/Ruscom-logo.svg' %}" height="20px" width="30px"></div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Войти</button>
+        </form>
+        <a href="{% url 'register' %}" class="sign_form_sign-other">Зарегистрироваться</a>
+    </div>  
+</div>
+
+{% block footer %}
+
+{% endblock %}
+{% endblock %}
